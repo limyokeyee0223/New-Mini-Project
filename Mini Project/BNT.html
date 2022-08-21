@@ -1,0 +1,485 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->       
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+        <link rel="icon" type="image/x-icon" href="Mini_project/icon.png" />
+
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+               
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+        
+        <script src="js/jquery-2.2.3.min.js"></script>
+        
+        <script src="js/bootstrap.min.js"></script>
+        
+        <script src="js/jquery.mycart.js"></script>
+        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <script src="//cdn.jsdelivr.net/npm/pouchdb@7.3.0/dist/pouchdb.min.js"></script>
+        
+        <title>Mini Project - WEMIDO</title>
+
+        <style>
+            div   /*navigation bar word*/
+            {
+                font-size: 20px;  
+            }
+            .nav_logout   /*navigation logout button*/
+            {
+                background-color: transparent;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                cursor: pointer;
+            }
+            body 
+            {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+
+                /* fallback for old browsers */
+                background: #ba84f5;
+          
+                /* Chrome 10-25, Safari 5.1-6 */
+                background: -webkit-linear-gradient(to left, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+          
+                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: linear-gradient(to left, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+            }
+            .container
+            {
+                text-align: justify;
+            }
+            .container-fluid h3   /*h3 word*/
+            {
+                font-weight: bold;
+            }
+            .row-two-column  ul    /*ul li become two column*/
+            {
+                columns: 2;
+                -webkit-columns: 2;
+                -moz-columns: 2;
+            }
+            .badge-notify 
+            {
+                background: red;
+                position: relative;
+                top: -20px;
+                right: 10px;
+            }
+            .my-cart-icon-affix 
+            {
+                z-index: 999;
+                color: white;
+            }
+            .cart /*add to cart button*/
+            {
+                background-color: rgb(112, 218, 144);
+                color: black;
+                padding:5px 20px;
+                border: none;
+                cursor: pointer;
+                width: 50%;
+                border-radius: 12px;
+            }
+            img /*footer image*/
+            {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            footer  /*footer*/
+            {
+                background: #111;
+                height: auto;
+                width: auto;
+                font-family: 'Open Sans';
+                padding-top: 20px;
+                color: #FFFFFF;
+            }
+            .footer-content  /*footer*/
+            {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-content h3  /*footer*/
+            {
+                font-size: 1.8rem;
+                font-weight: 400;
+                text-transform: capitalize;
+                line-height: 3rem;
+            }
+            .footer-content p  /*footer*/
+            {
+                font-size: 20px;
+                word-spacing: 2px;
+                text-transform: capitalize;
+            }
+            .footer-content span  /*footer*/
+            {
+                text-transform: uppercase;
+                opacity: .4;
+                font-weight: 200;
+            }
+            #btnScrollToTop
+            {
+                position: fixed;
+                right: 20px;
+                bottom: 20px;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                background: #daa139;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 25);
+                color: #FFFFFF;
+                outline: none;
+                cursor: pointer;
+            }
+            #btnScrollToTop :active
+            {
+                background: #daa139;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+            <div class="container-fluid">
+                <img src="Mini_project/icon.png" alt="Avatar Logo" style="width:50px;">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="About.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Course</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Courses_Name.html">Courses</a></li>
+                            <li><a class="dropdown-item" href="BCS.html">BCS</a></li>
+                            <li><a class="dropdown-item" href="BSE.html">BSE</a></li>
+                            <li><a class="dropdown-item" href="BNT.html">BNT</a></li>
+                            <li><a class="dropdown-item" href="DCS.html">DCS</a></li>
+                            <li><a class="dropdown-item" href="DEC.html">DEC</a></li>
+                            <li><a class="dropdown-item" href="DIT.html">DIT</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Customer_Profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Order.html">Order</a><i class="bi bi-cart" style="font-size: 2rem; color: cornflowerblue;"></i>
+                    </li>
+                    </ul>
+                    <div style="float: right; cursor: pointer;color:white">
+                        <span class="fa fa-shopping-cart glyphicon glyphicon-shopping-cart" style="color: white; padding-top: 13px; font-size: 20px" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                            <span class="badge badge-notify my-cart-badge" id="num"></span>
+                        </span>
+                    </div>
+                    <div class="topnav-right">
+                        <button class="nav_logout" type="button" onclick="window.location.href='Index.html'">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <script>
+            var db = new PouchDB('cart5');
+
+            function addrc(id, name, price, quantity, image) 
+            {
+                doc =
+                {
+                    _id: '001' + name + "" + sessionStorage.getItem("username"),
+                    username: sessionStorage.getItem("username"),
+                    product_id: id,
+                    product_name: name,
+                    product_price: price,
+                    quantity: quantity,
+                    image: image
+                }
+
+                db.put(doc, function (err, res) 
+                {
+                    if (err) 
+                    {
+                        // console.log(err)
+                        // window.location.replace("login.php?e=exits");
+                    }
+                    else 
+                    {
+                        location.reload();
+                        // console.log('document created')
+                        // window.location.replace("Register_Add.php");
+                    }
+                })
+                //console.log(image);
+            }
+
+            let quanti = 0;
+            let array_name = ['BCS', 'BSE', 'BNT', 'DCS', 'DEC', 'DIT'];
+            for (let i = 0; i < 6; i++) 
+            {
+                db.get('001' + array_name[i] + "" + sessionStorage.getItem("username")).then((doc) => {
+
+                quanti += parseInt(doc.quantity);
+
+                document.getElementById('num').innerHTML = quanti;
+
+                console.log(quanti);
+                })
+            }
+        </script>
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cart</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <script>
+                            //let array_name = ['BCS', 'BSE', 'BNT', 'DCS', 'DEC', 'DIT'];
+                            for (let i = 0; i < 6; i++) 
+                            {
+                                db.get('001' + array_name[i] + "" + sessionStorage.getItem("username")).then((doc) => {
+                                    console.log(doc.product_name);
+                                    if (doc.quantity != 0) 
+                                    {
+                                        let fg = '<tr><td><img src="' + doc.image + '" height="100px" width="100px" class="rounded-pill"></td><td>' + doc.product_name + '</td><td>RM ' + doc.product_price + '</td > <td><a href="?u=' + doc.product_name + '"><i class="fa fa-trash - alt"></i></a></td></tr>';
+
+                                        tableBody = $("table tbody");
+                                        tableBody.append(fg);
+                                    } 
+                                    else 
+                                    {
+                                        document.getElementById('war').innerHTML = '<div class="alert alert-danger" role="alert">No Items in Cart</div>';
+                                    }
+                                })
+                                //console.log(array_name[i]);
+                            }
+
+                            const queryString = window.location.search.substring(3);
+                            console.log(queryString);
+                            if (queryString) 
+                            {
+                                db.get('001' + queryString + "" + sessionStorage.getItem("username")).then(function (doc) {
+                                return db.remove(doc);
+                                });
+                                console.log(queryString);
+                                // sessionStorage.setItem("username", queryString);
+                                // save in sessions;
+                            }
+                        </script>
+
+                        <span id="war"></span>
+                        <table class="table">
+                            <tbody style="vertical-align: middle;">
+                            </tbody>
+                        </table>
+                        <!--<div id="image"></div><span id="name"></span> <span id="price"></span>-->
+                        <br>
+                        <center><a href="Payment.html"><button class="btn-lg px-5" style="background-color:powderblue;">Checkout</button></a></center>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button> -->
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container-fluid" style="margin-top:80px">
+            <button id="btnScrollToTop">
+                <i class="material-icons">arrow_upward</i>
+            </button>
+            <div class="container mt-3">
+                <br><div class="row">
+                    <div class="col-sm-4 col-xs-12 mb-3 mt-3">
+                        <img src="Mini_project/BNT.jpg" alt="" width="230" height="220" class="rounded-pill">
+                    </div>
+                    <div class="col-sm-8 col-xs-12 mb-3 mt-3">
+                        <b>Course Name: </b>Bachelor of Computer Science (Hons) in Network Technology
+                        <br><br><b>Lecturer Name: </b>Carmen
+                        <br><br><b>Duration: </b>3 years (Total up 8 semesters, incl. Industrial Training)
+                        <br><br><b>Total Course Fees: </b>RM 42,300
+                    </div>
+                </div><br><br>
+                <div class="row">
+                    <div class="col-12 col-xs-12 mb-3 mt-3">
+                        <h3>Course Introduction</h3>
+                        <p>Computer Science is an exciting and rapidly developing discipline that offers excellent employment prospects and well-paid careers. At NEUC, we teach you the fundamentals of computer science, specialising in network technology which allows the exchange of data between various systems and applications through computer communication. Students will learn hardware and network systems, network protocols, local networks, wireless networks, and network security. This specialisation will offer students the opportunity to work as network systems analysts, network systems administrators, data communication analysts and consultants.</p>
+                    </div><br><br>
+                </div>
+                <div class="row">
+                    <div class="col-12 col-xs-12 mb-3 mt-3">
+                        <h3>Minimum Entry Requirement</h3>
+                        <ul>
+                            <li>A pass in STPM with a minimum Grade C (GP 2.0) in any 2 subjects and a credit in Additional Mathematics at SPM Level or its equivalent</li>
+                            <li>UEC with at least credit in any 5 subjects inclusive of Advanced Mathematics or any equivalent qualification</li>
+                            <li>A pass in Matriculation or Foundation studies with minimum CGPA of 2.0 and a credit in Additional Mathematics at SPM level or its equivalent</li>
+                            <li>A Diploma in Computer Science OR Software Engineering OR Information Technology OR Information Systems or equivalent with a minimum CGPA of 2.5 and a credit in Additional Mathematics at SPM Level or its equivalent</li>
+                            <li>A Level / Other qualifications deemed equivalent by MQA</li>
+                        </ul>
+                    </div><br><br>
+                </div>
+                <div class="row-two-column">
+                    <div class="col-12 col-xs-12 mb-3 mt-3">
+                        <h3>Career Prospects</h3>
+                        <div class="col-10 col-xs-12 mb-3 mt-3" style="text-align:left;">
+                            <ul>
+                                <li>Network Engineer</li>
+                                <li>Network System Analyst</li>
+                                <li>Network System Administrator</li>
+                                <li>Network Specialist</li>
+                                <li>Computer Network Designer</li>
+                                <li>System Engineer</li>
+                                <li>Systems Administrator</li>
+                                <li>Data Communication Analyst</li>
+                                <li>Network Consultant</li>
+                                <li>Security Consultant</li>
+                                <li>Technical Consultant</li>
+                                <li>IT Manager</li>
+                                <li>IT Trainer</li>
+                                <li>Researcher</li>
+                            </ul>
+                        </div><br>
+                    </div>
+                </div>
+                <center><button class="cart" data-id="3" data-name="BNT" data-summary="summary 3" data-price="42,300" data-quantity="1" data-image="Mini_project/BNT.jpg" onclick="addrc(1,'BNT',42300,1,'Mini_project/BNT.jpg')">
+                    <b>Add to Cart</b>
+                </button></center>
+            </div><br><br>
+        </div>
+
+        <script>
+            const btnScrollToTop = document.querySelector("#btnScrollToTop");
+
+            btnScrollToTop.addEventListener("click", function()
+            {
+                window.scrollTo
+                ({
+                    top: 0,
+                    left: 0,
+                    behavior: "smooth"
+                });
+            });
+        
+            $(function () 
+            {
+                var goToCartIcon = function ($addTocartBtn) 
+                {
+                    var $cartIcon = $(".my-cart-icon");
+                    var $image = $('<img width="50px" height="50px" class="rounded-pill" src="' + $addTocartBtn.data("image") + '"/>').css({ "position": "absolute", "z-index": "999" });
+                    $addTocartBtn.prepend($image);
+                    var position = $cartIcon.position();
+                    $image.animate({
+                        top: position.top,
+                        left: position.left
+                    }, 500, "linear", function () {
+                        $image.remove();
+                    });
+                }
+
+                $('.cart').myCart({
+                    currencySymbol: '$',
+                    classCartIcon: 'my-cart-icon',
+                    classCartBadge: 'my-cart-badge',
+                    classProductQuantity: 'my-product-quantity',
+                    classProductRemove: 'my-product-remove',
+                    classCheckoutCart: 'my-cart-checkout',
+                    affixCartIcon: true,
+                    showCheckoutModal: true,
+                    numberOfDecimals: 2,
+
+                    cartItems:
+                    [
+                        //{id: 1, name: 'BCS', summary: 'summary 1', price: 41700, quantity: 1, image: 'Mini_project/BCS.jpg'},
+                        //{id: 2, name: 'BSE', summary: 'summary 2', price: 40800, quantity: 2, image: 'Mini_project/BSE.jpg'},
+                        //{id: 3, name: 'BNT', summary: 'summary 3', price: 42300, quantity: 1, image: 'Mini_project/BNT.jpg'}
+                    ],
+
+                    clickOnAddToCart: function ($addTocart) 
+                    {
+                        goToCartIcon($addTocart);
+                    },
+                    afterAddOnCart: function (products, totalPrice, totalQuantity) 
+                    {
+                        //console.log("afterAddOnCart", products, totalPrice, totalQuantity);
+                    },
+                    clickOnCartIcon: function ($cartIcon, products, totalPrice, totalQuantity) 
+                    {
+                        //console.log("cart icon clicked", $cartIcon, products, totalPrice, totalQuantity);
+                    },
+                    checkoutCart: function (products, totalPrice, totalQuantity) 
+                    {
+                        var checkoutString = "Total Price: " + totalPrice + "\nTotal Quantity: " + totalQuantity;
+                        checkoutString += "\n\n id \t name \t summary \t price \t quantity \t image path";
+                        $.each(products, function () 
+                        {
+                            checkoutString += ("\n " + this.id + " \t " + this.name + " \t " + this.summary + " \t " + this.price + " \t " + this.quantity + " \t " + this.image);
+                        });
+                        alert(checkoutString)
+                        // console.log("checking out", products, totalPrice, totalQuantity);
+                    }
+                });
+            });
+        </script>
+
+        <script>
+            function delete2(name2, rev_id) 
+            {
+                alert(name2);
+                //  db.get('001' + name2 + "" + sessionStorage.getItem("username")).then(function (doc) {
+                //  ''
+                //  console.log(doc._rev);
+                //  return db.remove(doc);
+                //});
+                //  db.remove('001' + array_name[i] + "" + sessionStorage.getItem("username"), rev_id);
+            }
+        </script>
+
+        <footer>
+            <div class="footer-content">
+                <h3><img src="Mini_project/icon.png" alt="Avatar Logo" style="width:100px;">WEMIDO</h3>
+                <p>New Era University College <br> Education Purpose Only <br> Copyright @ 2120057, 2120076, 2120077 . designed by <span>Lim Yoke Yee, Lim Feng Ting, Melissa Chan Jia Eu</span></p>
+            </div>
+        </footer>
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        -->
+    </body>
+</html>

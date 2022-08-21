@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <script src="//cdn.jsdelivr.net/npm/pouchdb@7.3.0/dist/pouchdb.min.js"></script>
+
+        <link rel="icon" type="image/x-icon" href="Mini_project/icon.png" />
+
+        <title>Mini Project - WEMIDO</title>
+
+        <style>
+            div /*navigation bar word*/ 
+            {
+                font-size: 20px;
+            }
+            .nav_logout /*navigation logout button*/ 
+            {
+                background-color: transparent;
+                color: white;
+                padding: 12px 20px;
+                border: none;
+                cursor: pointer;
+            }
+            body 
+            {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+
+                /* fallback for old browsers */
+                background: #ba84f5;
+          
+                /* Chrome 10-25, Safari 5.1-6 */
+                background: -webkit-linear-gradient(to left, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1));
+          
+                /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+                background: linear-gradient(to left, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
+            }
+            #btn-lg 
+            {
+                margin: 0;
+                font-family: Arial, Helvetica, sans-serif;
+                border: none;
+                padding: 12px 50px;
+                font-size: 25px;
+                border-radius: 10px;
+                color: black;
+                background: #9F98E8;
+                background: -webkit-linear-gradient(to left, rgba(159, 152, 232, 1), rgba(175, 246, 207, 1));
+                background: linear-gradient(to left, rgba(159, 152, 232, 1), rgba(175, 246, 207, 1));
+            }
+            th 
+            {
+                border: none;
+                text-align: right;
+                padding: 8px;
+            }
+            td 
+            {
+                border: none;
+                text-align: left;
+                padding: 8px;
+            }
+            img.avatar /*middle image*/ 
+            {
+                width: 40%;
+            }
+            .container /*reset password*/ 
+            {
+                padding: 16px;
+            }
+            img /*footer image*/ 
+            {
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            footer /*footer*/ 
+            {
+                background: #111;
+                height: auto;
+                width: auto;
+                font-family: 'Open Sans';
+                padding-top: 20px;
+                color: #FFFFFF;
+            }
+            .footer-content /*footer*/ 
+            {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-direction: column;
+                text-align: center;
+            }
+            .footer-content h3 /*footer*/
+            {
+                font-size: 1.8rem;
+                font-weight: 400;
+                text-transform: capitalize;
+                line-height: 3rem;
+            }
+            .footer-content p /*footer*/ 
+            {
+                font-size: 20px;
+                word-spacing: 2px;
+                text-transform: capitalize;
+            }
+            .footer-content span /*footer*/ 
+            {
+                text-transform: uppercase;
+                opacity: .4;
+                font-weight: 200;
+            }
+        </style>
+    </head>
+    
+    <body>
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark fixed-top">
+            <div class="container-fluid">
+                <img src="Mini_project/icon.png" alt="Avatar Logo" style="width:50px;">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="mynavbar">
+                    <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="Home.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="About.html">About</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">Course</a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="Courses_Name.html">Courses</a></li>
+                            <li><a class="dropdown-item" href="BCS.html">BCS</a></li>
+                            <li><a class="dropdown-item" href="BSE.html">BSE</a></li>
+                            <li><a class="dropdown-item" href="BNT.html">BNT</a></li>
+                            <li><a class="dropdown-item" href="DCS.html">DCS</a></li>
+                            <li><a class="dropdown-item" href="DEC.html">DEC</a></li>
+                            <li><a class="dropdown-item" href="DIT.html">DIT</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Customer_Profile.html">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="Order.html">Order</a>
+                    </li>
+                    </ul>
+                    <div class="topnav-right">
+                        <button class="nav_logout" type="button" onclick="window.location.href='Index.html'">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <script>
+            var db = new PouchDB('register');
+            //get the session data
+            db.get('001' + sessionStorage.getItem("username")).then((doc) => {
+                document.getElementById('username').innerHTML = doc.username;
+            })
+            
+            db.get('001' + sessionStorage.getItem("username")).then((doc) => {
+                document.getElementById('ic').innerHTML = doc.ic_no;
+            })
+
+            db.get('001' + sessionStorage.getItem("username")).then((doc) => {
+                document.getElementById('email').innerHTML = doc.email;
+            })
+
+            db.get('001' + sessionStorage.getItem("username")).then((doc) => {
+                document.getElementById('address').innerHTML = doc.address;
+            })
+
+            db.get('001' + sessionStorage.getItem("username")).then((doc) => {
+                document.getElementById('contactnumber').innerHTML = doc.contact;
+            })
+        </script>
+        
+        <div class="container-fluid" style="margin-top:80px">
+            <form class="w-100 px-4 py-5" style="border-radius: .5rem .5rem 0 0;">
+                <center><a href="Customer_Profile_Edit.html"><button id="btn-lg" type="button">Edit</button></a></center>
+                <br><div class="row d-flex justify-content-center">
+                    <div class="col-12 col-md-8 col-lg-6 col-xl-6">  <!--form width-->
+                        <div class="card bg-dark text-white" style="border-radius: 1rem;">
+                            <div class="card-body p-5 text-center">
+          
+                            <h1 class="fw-bold mb-2 text-uppercase">Profile</h1><br>
+                            <img src="Mini_project/profile.png" alt="Avatar" class="avatar"><br><br>
+                            
+                            <div>
+                                <table class="table table-borderless" style="color: white;">
+                                <tr>
+                                    <th>Username: </th>
+                                    <td><b id="username"></b></td>
+                                </tr>
+                                <tr>
+                                    <th>IC Number: </th>
+                                    <td><b id="ic"></b></td>
+                                </tr>
+                                <tr>
+                                    <th>Email: </th>
+                                    <td><b id="email"></b></td>
+                                </tr>
+                                <tr>
+                                    <th>Address: </th>
+                                    <td><b id="address"></b></td>
+                                </tr>
+                                <tr>
+                                    <th>Contact Number: </th>
+                                    <td><b id="contactnumber"></b></td>
+                                </tr>
+                                </table>
+                            </div>
+
+                            <br><a href="Certificate.html"><button class="btn btn-outline-light btn-lg px-5" type="button"><i class="fa fa-download"></i> <b>Download Certificate</b></button></a><br>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <footer>
+            <div class="footer-content">
+                <h3><img src="Mini_project/icon.png" alt="Avatar Logo" style="width:100px;">WEMIDO</h3>
+                <p>New Era University College <br> Education Purpose Only <br> Copyright @ 2120057, 2120076, 2120077 . designed by <span>Lim Yoke Yee, Lim Feng Ting, Melissa Chan Jia Eu</span></p>
+            </div>
+        </footer>
+
+        <!-- Optional JavaScript; choose one of the two! -->
+
+        <!-- Option 1: Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+        <!-- Option 2: Separate Popper and Bootstrap JS -->
+        <!--
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+        -->
+    </body>
+</html>
